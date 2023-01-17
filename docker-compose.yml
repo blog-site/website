@@ -44,4 +44,4 @@ secrets:
   mysql_root_password:
     file: ./mysql/secrets/mysql_root_password.txt
   jwt_secret_key:
-    file: ./flask/secrets/jwt_secret_key
+    file: ./flask/secrets/jwt_secret_key.txt
