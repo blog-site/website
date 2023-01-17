@@ -1,6 +1,6 @@
 [submodule "flask"]
 	path = flask
-	url = ../flask/.git
+	url = https://github.com/blog-site/flask.git
 [submodule "mysql"]
 	path = mysql
-	url = ../mysql/.git/
+	url = https://github.com/blog-site/mysql.git
