@@ -11,6 +11,13 @@ services:
         - mysql
     volumes:
       - ./flask/src:/app
+    networks:
+      - frontend
+      - backend
+    secrets:
+      - jwt_secret_key
+      - mysql_password
+
   mysql:
     build: ./mysql
     restart: always
@@ -20,11 +27,21 @@ services:
       MYSQL_USER: db_user
       MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    networks:
+      - backend
     secrets:
       - mysql_password
       - mysql_root_password
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
 secrets:
   mysql_password:
     file: ./mysql/secrets/mysql_password.txt
   mysql_root_password:
     file: ./mysql/secrets/mysql_root_password.txt
+  jwt_secret_key:
+    file: ./flask/secrets/jwt_secret_key
