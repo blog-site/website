@@ -7,8 +7,6 @@ services:
     container_name: flask
     ports:
         - "5000:5000"
-    depends_on:
-        - mysql
     volumes:
       - ./flask/src:/app
     networks:
@@ -16,21 +14,18 @@ services:
       - backend
     secrets:
       - jwt_secret_key
-      - mysql_password
-
+      - mysql_root_password
+    depends_on:
+        - mysql
   mysql:
     build: ./mysql
     restart: always
     container_name: mysql
     environment:
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
     networks:
       - backend
     secrets:
-      - mysql_password
       - mysql_root_password
 
 networks:
