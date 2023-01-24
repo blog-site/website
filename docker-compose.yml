@@ -15,6 +15,8 @@ services:
     secrets:
       - jwt_secret_key
       - mysql_root_password
+      - cert
+      - privkey
     depends_on:
         - mysql
   mysql:
@@ -34,9 +36,11 @@ networks:
   backend:
     driver: bridge
 secrets:
-  mysql_password:
-    file: ./mysql/secrets/mysql_password.txt
   mysql_root_password:
     file: ./mysql/secrets/mysql_root_password.txt
   jwt_secret_key:
     file: ./flask/secrets/jwt_secret_key.txt
+  cert:
+    file: /etc/letsencrypt/live/tonych.me/cert.pem
+  privkey:
+    file: /etc/letsencrypt/live/tonych.me/privkey.pem
